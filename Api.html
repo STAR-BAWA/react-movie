@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API</title>
+</head>
+<body>
+    <h1>Simple API</h1>
+    <button id="fetchData">Fetch Data</button>
+    <ul id="dataList"></ul>
+
+    <script>
+        const data = [
+            { id: 1, name: 'Item 1' },
+            { id: 2, name: 'Item 2' },
+            { id: 3, name: 'Item 3' },
+        ];
+
+        // Simulate an API endpoint
+        const fetchData = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(data);
+                }, 5000); // Simulate network delay
+            });
+        };
+
+        // Fetch and display data when the button is clicked
+        document.getElementById('fetchData').addEventListener('click', async () => {
+            const result =  await fetchData();
+            const dataList = document.getElementById('dataList');
+            dataList.innerHTML = ''; // Clear existing data
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                dataList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
